@@ -1,4 +1,4 @@
-let rotation = '0';
+window.addEventListener('load', ()=>{
 
 let resetRotationButton = document.getElementById('resetRotationButton');
 
@@ -32,6 +32,25 @@ function setRotationOnMove(e) {
   let totalRotation = (Math.abs(60 * x) + Math.abs(60 * y)) / 2;
 
   table.style.transform = `rotate3d(${y}, ${x}, 0, ${totalRotation}deg)`;
+
+  let midW = innerWidth / 2;
+  let midH = innerHeight / 2;
+
+  if (e.clientX >= midW) {
+    table.classList.add('showLeft');
+    table.classList.remove('showRight');
+  } else {
+    table.classList.add('showRight');
+    table.classList.remove('showLeft');
+  }
+
+  if (e.clientY <= midH) {
+    table.classList.add('showBottom');
+    table.classList.remove('showTop');
+  } else {
+    table.classList.add('showTop');
+    table.classList.remove('showBottom');
+  }
 }
 
 let colorArray = [
@@ -99,10 +118,12 @@ for (let i = 0; i < colorArray.length; i++) {
   for (let j = 0; j < colorArray[i].length; j++) {
     let cell = document.createElement('td');
     cell.style.backgroundColor = '#' + colorArray[i][j];
-		cell.style.transform = 'translateZ(' + cellDepthArray[i][j] * 10 + 'px)';
+		cell.style.transform = 'translateZ(' + cellDepthArray[i][j] * 20 + 'px)';
     cell.setAttribute('depth', cellDepthArray[i][j]);
 
     row.appendChild(cell);
   }
   table.appendChild(row);
 }
+
+})
