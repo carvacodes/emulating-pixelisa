@@ -36,6 +36,44 @@ function toggleVolumetric(e){
 window.addEventListener('mousemove', setRotationOnMove);
 window.addEventListener('touchmove', setRotationOnMove, {passive: false});
 
+window.addEventListener("deviceorientation", handleOrientation);
+
+function handleOrientation(e) {
+  let x = e.beta == 90 ? 360 : 90 - e.beta;
+  let y = e.gamma;
+  let z = e.alpha * -1;
+
+  if (e.gamma >= 0) {
+    table.classList.add('showBottom');
+    table.classList.add('showLeft');
+    table.classList.remove('showRight');
+    table.classList.remove('showTop');
+  } else {
+    table.classList.remove('showBottom');
+    table.classList.remove('showLeft');
+    table.classList.add('showRight');
+    table.classList.add('showTop');
+  }
+
+  if (e.alpha >= 0 && e.alpha <= 180) {
+    table.classList.add('showLeft');
+    table.classList.remove('showRight');
+  } else {
+    table.classList.add('showRight');
+    table.classList.remove('showLeft');
+  }
+
+  if (e.beta >= 0 && e.beta <= 90) {
+    table.classList.add('showBottom');
+    table.classList.remove('showTop');
+  } else {
+    table.classList.add('showTop');
+    table.classList.remove('showBottom');
+  }
+
+  table.style.transform = `rotate3d(1, 0, 0, ${x}deg) rotate3d(0, 1, 0, ${y}deg) rotate3d(0, 0, 1, ${z}deg)`;
+}
+
 function setRotationOnMove(e) {
   if (e.changedTouches) {
     e.preventDefault();
