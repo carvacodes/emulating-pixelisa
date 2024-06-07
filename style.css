@@ -49,7 +49,7 @@ td {
   position: relative;
 }
 
-table.showRight td::after {
+table.volumetric.showRight td::after {
   content: ' ';
   width: 40px;
   height: 15px;
@@ -60,7 +60,7 @@ table.showRight td::after {
   transform: rotateY(90deg) translateX(19.8px);
 }
 
-table.showBottom td::before {
+table.volumetric.showBottom td::before {
   content: ' ';
   width: 15px;
   height: 40px;
@@ -71,7 +71,7 @@ table.showBottom td::before {
   transform: rotateX(90deg) translateY(-20px);
 }
 
-table.showLeft td::after {
+table.volumetric.showLeft td::after {
   content: ' ';
   width: 40px;
   height: 15px;
@@ -82,7 +82,7 @@ table.showLeft td::after {
   transform: rotateY(90deg) translateX(19.8px);
 }
 
-table.showTop td::before {
+table.volumetric.showTop td::before {
   content: ' ';
   width: 15px;
   height: 40px;

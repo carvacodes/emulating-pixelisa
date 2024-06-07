@@ -1,16 +1,38 @@
 window.addEventListener('load', ()=>{
 
-let resetRotationButton = document.getElementById('resetRotationButton');
+  window.addEventListener('click', (e)=>{
+    switch (e.target.id) {
+      case 'resetRotationButton':
+        resetRotation();
+      break;
+      case 'originalButton': 
+        openOriginal();
+      break;
+      case 'flatOrVolumetricButton':
+        toggleVolumetric(e);
+      break;
+    }
+  });
 
-resetRotationButton.addEventListener('click', function(){
+function resetRotation(){
 	table.style.transform = 'rotate3d(0, 0, 0, 0deg)';
-});
+}
 
-let original = document.getElementById('original');
 
-original.addEventListener('click', function(){
+function openOriginal(){
 	window.open('https://i.redd.it/lfu55nvvpoq01.jpg');
-});
+};
+
+function toggleVolumetric(e){
+  console.log(e.target, e.target.innerText)
+  if (table.classList.contains('volumetric')) {
+    table.classList.remove('volumetric');
+    e.target.innerText = 'Enable Volumetric';
+  } else {
+    table.classList.add('volumetric');
+    e.target.innerText = 'Disable Volumetric';
+  }
+};
 
 window.addEventListener('mousemove', setRotationOnMove);
 window.addEventListener('touchmove', setRotationOnMove, {passive: false});
@@ -118,7 +140,7 @@ for (let i = 0; i < colorArray.length; i++) {
   for (let j = 0; j < colorArray[i].length; j++) {
     let cell = document.createElement('td');
     cell.style.backgroundColor = '#' + colorArray[i][j];
-		cell.style.transform = 'translateZ(' + cellDepthArray[i][j] * 20 + 'px)';
+		cell.style.transform = 'translateZ(' + cellDepthArray[i][j] * 10 + 'px)';
     cell.setAttribute('depth', cellDepthArray[i][j]);
 
     row.appendChild(cell);
