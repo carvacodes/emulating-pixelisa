@@ -24,7 +24,6 @@ function openOriginal(){
 };
 
 function toggleVolumetric(e){
-  console.log(e.target, e.target.innerText)
   if (table.classList.contains('volumetric')) {
     table.classList.remove('volumetric');
     e.target.innerText = 'Enable Volumetric';
